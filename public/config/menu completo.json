@@ -1,0 +1,732 @@
+[
+  {
+    "title": "Aplicaciones",
+    "menus": [
+      {
+        "name": "Visor de Mapas",
+        "route": "/pages/",
+        "subMenus": [
+          {
+            "name": "Bases Cartográficas Especializadas",
+            "subSubMenu": [
+              {
+                "name": "Puntos de la red geodésica",
+                "actions": [
+                  {
+                    "name": "Puntos de la red geodésica",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "redgeosesica",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:aflor_cinturon_plegado",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "Mapas Topográficos",
+                "actions": [
+                  {
+                    "name": "MTD 25000",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "mtd25",
+                      "url": "/proxy/geocuba/geoserver/mdt/wms",
+                      "layers": "mdt:mdt25",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  },
+                  {
+                    "name": "MTD Sombra 25000",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "mtd25sombra",
+                      "url": "/proxy/geocuba/geoserver/mdt/wms",
+                      "layers": "mdt:mdt25_sombra",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  },
+                  {
+                    "name": "Cartograma 25 000",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "carto25",
+                      "url": "/proxy/geocuba/geoserver/ij/wms",
+                      "layers": "ij:cartograma_25k",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "Cartas Náuticas",
+                "actions": [
+                  {
+                    "name": "Parte Occidental de Cuba",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "cartanauticaOccidente",
+                      "url": "/proxy/mapas.geocuba.cu/geoserver/em/wms",
+                      "layers": "em:bsb_11401",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  },
+                  {
+                    "name": "Parte Central de Cuba",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "accesocentro",
+                      "url": "/proxy/mapas.geocuba.cu/geoserver/em/wms",
+                      "layers": "em:bsb_11402",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  },
+                  {
+                    "name": "Parte Oriental de Cuba",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "cartanauticaOriental",
+                      "url": "/proxy/mapas.geocuba.cu/geoserver/em/wms",
+                      "layers": "em:bsb_11403",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "Catastro",
+                "actions": [
+                  {
+                    "name": "Lugares Habitados",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Lugares Habitados",
+                      "url": "/geoserver/catastro/wms",
+                      "layers": "catastro:lugareshabitados",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  },
+                  {
+                    "name": "Manzanas",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Manzanas",
+                      "url": "/geoserver/catastro/wms",
+                      "layers": "catastro:manzanas",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Uso de la Tierra",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "parcelausos",
+                      "url": "/proxy/minag.geocuba.cu/geoserver/gmx/wms",
+                      "layers": "gmx:parcelas_minag",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13,
+                      "styles": "parcelas_tipo_uso"
+                    }
+                  },
+                  {
+                    "name": "Tipo de Superficie",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "tiposup",
+                      "url": "/proxy/minag.geocuba.cu/geoserver/gmx/wms",
+                      "layers": "gmx:parcelas_minag",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13,
+                      "styles": "parcelas_tipo_superficie"
+                    }
+                  },
+                  {
+                    "name": "Tipo de Poseedor",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "tipopos",
+                      "url": "/proxy/minag.geocuba.cu/geoserver/gmx/wms",
+                      "layers": "gmx:parcelas_minag",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13,
+                      "styles": "parcelas_tipo_poseedor"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "Hidrografía",
+                "actions": [
+                  {
+                    "name": "Acuíferos embalses subterráneos",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "AcuiferosEmbSub",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:acuiferos_embalses_subterraneos",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  },
+                  {
+                    "name": "Cuencas Hidrográficas",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "CuencasHidrográficas",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:cuencas",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Flujos superficiales (Cuba)",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Flujossuperficiales",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:flujos_25000",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Pluviómetros",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Pluviómetros",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:pluviometros",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25,
+                      "crs": 3795
+                    }
+                  },
+                  {
+                    "name": "Pozos de explotación",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Pozosdeexplotación",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:pozos_explotacion",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Puntos de entrega",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Puntosdeentrega",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:puntos_entrega",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Red de calidad de las aguas",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Redcalidadlasaguas",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:red_calidad_aguas",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Mapas Generales",
+            "subSubMenu": [
+              {
+                "name": "Geología",
+                "actions": [
+                  {
+                    "name": "Afloramientos del cinturón plegado",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Afloramientos",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:aflor_cinturon_plegado",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  },
+                  {
+                    "name": "Bloques Hósticos",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "BloquesHosticos",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:bloques_hosticos",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Fallas y Alineamientos",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "FallasAlineamientos",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:fallas_alineamientos_zef",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Paleogeografía. Pleistoceno Superior",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "PaleogeografíaPleistocenoSuperior",
+                      "url": "/proxy/geocuba/geoserver/ca/wms",
+                      "layers": "ca:pleistoceno_superior",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Paleogeografía. Pleistoceno Superior Tardío",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "PaleogeografíaPleistocenoSuperiorTardio",
+                      "url": "/proxy/geocuba/geoserver/ca/wms",
+                      "layers": "ca:pleistoceno_superior_tardio",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Paleogeografía. Plioceno al Pleistoceno Inferior",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "PaleogeografíaPleistocenoSuperiorInferior",
+                      "url": "/proxy/geocuba/geoserver/ca/wms",
+                      "layers": "ca:plioceno_pleistoceno",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Tipos de Rocas",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "TiposRocasr",
+                      "url": "/proxy/geocuba/geoserver/ca/wms",
+                      "layers": "ca:tipo_roca",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Zonación Estructuro-Funcional",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "PZonacionEStructuro",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:zef",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "Hidrografía",
+                "actions": [
+                  {
+                    "name": "Acuíferos embalses subterráneos",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "AcuiferosEmbSub",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:acuiferos_embalses_subterraneos",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 11,
+                      "zoommax": 13
+                    }
+                  },
+                  {
+                    "name": "Cuencas Hidrográficas",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "CuencasHidrográficas",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:cuencas",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Flujos superficiales (Cuba)",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Flujossuperficiales",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:flujos_25000",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Pluviómetros",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Pluviómetros",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:pluviometros",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25,
+                      "crs": 3795
+                    }
+                  },
+                  {
+                    "name": "Pozos de explotación",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Pozosdeexplotación",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:pozos_explotacion",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Puntos de entrega",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Puntosdeentrega",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:puntos_entrega",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  },
+                  {
+                    "name": "Red de calidad de las aguas",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "Redcalidadlasaguas",
+                      "url": "/proxy/geocuba/geoserver/limites/wms",
+                      "layers": "limites:red_calidad_aguas",
+                      "version": "1.3.0",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.8,
+                      "uppercase": true,
+                      "zIndex": 150,
+                      "zoommin": 13,
+                      "zoommax": 25
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Datos Meteorológicos",
+            "subSubMenu": [
+              {
+                "name": "OpenWeatherMap",
+                "actions": [
+                  {
+                    "name": "Mapa de Precipitación",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "openweather_precipitation",
+                      "url": "https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.7,
+                      "zIndex": 300,
+                      "zoommin": 0,
+                      "zoommax": 19,
+                      "isMeteoLayer": true,
+                      "serviceId": "openweather"
+                    }
+                  },
+                  {
+                    "name": "Mapa de Nubosidad",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "openweather_clouds",
+                      "url": "https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.6,
+                      "zIndex": 301,
+                      "zoommin": 0,
+                      "zoommax": 19,
+                      "isMeteoLayer": true,
+                      "serviceId": "openweather"
+                    }
+                  },
+                  {
+                    "name": "Mapa de Presión Atmosférica",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "openweather_pressure",
+                      "url": "https://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.7,
+                      "zIndex": 302,
+                      "zoommin": 0,
+                      "zoommax": 19,
+                      "isMeteoLayer": true,
+                      "serviceId": "openweather"
+                    }
+                  },
+                  {
+                    "name": "Mapa de Viento",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "openweather_wind",
+                      "url": "https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.6,
+                      "zIndex": 303,
+                      "zoommin": 0,
+                      "zoommax": 19,
+                      "isMeteoLayer": true,
+                      "serviceId": "openweather"
+                    }
+                  },
+                  {
+                    "name": "Mapa de Temperatura",
+                    "action": "activateLayer",
+                    "layerConfig": {
+                      "layerId": "openweather_temp",
+                      "url": "https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png",
+                      "format": "image/png",
+                      "transparent": true,
+                      "opacity": 0.7,
+                      "zIndex": 304,
+                      "zoommin": 0,
+                      "zoommax": 19,
+                      "isMeteoLayer": true,
+                      "serviceId": "openweather"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+     
+    ]
+  }
+]
