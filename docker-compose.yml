@@ -1,0 +1,12 @@
+version: '3'
+services:
+  ide-meteorologia:
+    container_name: ide-meteorologia
+    image: ide-meteorologia:latest
+    ports:
+      - 3060:3000
+    volumes:
+      - ./config:/app/public/config
+      - ./runtime-config.js:/app/public/runtime-config.js  
+    environment:
+      - NEXT_PUBLIC_CONFIG_URL=/config  #

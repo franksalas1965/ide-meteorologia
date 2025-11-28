@@ -1,0 +1,23 @@
+[
+  {
+    "id": "osm",
+    "name": "OpenStreetMap",
+    "url": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "attribution": "© OpenStreetMap contributors",
+    "thumbnail": "/base-layers/osm.jpg"
+  },
+  {
+    "id": "satellite",
+    "name": "Satélite",
+    "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    "attribution": "© Esri",
+    "thumbnail": "/base-layers/satellite.jpg"
+  },
+  {
+    "id": "topo",
+    "name": "Topográfico",
+    "url": "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    "attribution": "© OpenTopoMap",
+    "thumbnail": "/base-layers/topo.jpg"
+  }
+]

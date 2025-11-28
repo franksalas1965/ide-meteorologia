@@ -1,0 +1,51 @@
+Crea un archivo start.bat en htdocs:
+
+bash
+@echo off
+SET NODE_ENV=production
+node .next/standalone/server.js
+
+
+
+¿Cómo usarlo en XAMPP?
+1. Contenido del archivo start.bat (colócalo en la raíz de tu proyecto en htdocs):
+batch
+@echo off
+cd /d "C:\xampp\htdocs\tu_proyecto"
+SET NODE_ENV=production
+node .next/standalone/server.js
+cd /d: Cambia al directorio de tu proyecto.
+
+SET NODE_ENV=production: Configura el entorno como producción.
+
+node .next/standalone/server.js: Inicia el servidor Next.js.
+
+******************************************
+
+Opción 1: Ejecutarlo al iniciar Windows (para que siempre esté disponible)
+Presiona Win + R, escribe shell:startup y pega un acceso directo a start.bat.
+
+Así, el servidor se iniciará automáticamente al encender la PC.
+
+Opción 2: Usar un servicio de Windows (más profesional)
+Instala node-windows como servicio:
+
+bash
+npm install -g node-windows
+Crea un script register-service.js:
+
+javascript
+const { Service } = require('node-windows');
+const svc = new Service({
+  name: 'NextJS Server',
+  description: 'Servidor Next.js para XAMPP',
+  script: 'C:\\xampp\\htdocs\\tu_proyecto\\.next\\standalone\\server.js',
+  env: { name: 'NODE_ENV', value: 'production' }
+});
+svc.on('install', () => svc.start());
+svc.install();
+Ejecútalo una vez:
+
+bash
+node register-service.js
+Ahora Next.js correrá en segundo plano como un servicio.

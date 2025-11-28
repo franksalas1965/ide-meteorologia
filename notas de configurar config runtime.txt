@@ -1,0 +1,229 @@
+Veo que estás usando el nuevo App Router de Next.js. Aquí tienes la solución completa refactorizada:
+
+## 1. Primero, crea un utilitario para obtener la configuración en runtime
+
+Crea `src/utils/runtimeConfig.ts`:
+
+```typescript
+// Utilidad para obtener configuraciones en runtime
+export const getRuntimeConfig = (): { configUrl: string } => {
+  if (typeof window === 'undefined') {
+    // Server side - usa variable de entorno o valor por defecto
+    return {
+      configUrl: process.env.NEXT_PUBLIC_CONFIG_URL || '/config'
+    };
+  }
+
+  // Client side - busca configuración runtime primero
+  const runtimeConfig = (window as any).__RUNTIME_CONFIG__;
+  
+  return {
+    configUrl: runtimeConfig?.NEXT_PUBLIC_CONFIG_URL || 
+               process.env.NEXT_PUBLIC_CONFIG_URL || 
+               '/config'
+  };
+};
+```
+
+## 2. Refactoriza el hook `useMenu.ts`
+
+```typescript
+"use client";
+
+import { useEffect, useState } from "react";
+import { MenuGroup } from "../types/menu";
+import { getRuntimeConfig } from "../utils/runtimeConfig";
+
+export default function useMenu() {
+  const [menuGroups, setMenuGroups] = useState<MenuGroup[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const { configUrl } = getRuntimeConfig();
+        const response = await fetch(`${configUrl}/menu.json`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setMenuGroups(data);
+      } catch (err) {
+        console.error("Error loading menu:", err);
+        setError(err instanceof Error ? err.message : "Failed to load menu");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMenu();
+  }, []);
+
+  return { menuGroups, loading, error };
+}
+```
+
+## 3. Refactoriza el componente `MainLayout.ts`
+
+```typescript
+"use client";
+import { useState, useCallback, useEffect, useMemo } from "react";
+import { Box, CircularProgress, Snackbar, Alert } from "@mui/material";
+import Sidebar from "../../components/layout/Sidebar";
+import useMenu from "../../hooks/useMenu";
+import Header from "./Header";
+import DynamicArea from "../DynamicArea";
+import { DashboardAction, DynamicComponentType } from "../../types/types";
+import { MenuAction, MenuGroup } from "../../types/menu";
+import { WMSLayer, LayerState } from "@/types/map-types";
+import { getWMSLayerBounds } from "@/utils/wmsUtils";
+import { getRuntimeConfig } from "@/utils/runtimeConfig";
+
+// ... resto del código sin cambios hasta el useEffect ...
+
+useEffect(() => {
+  const loadBaseLayersConfig = async () => {
+    try {
+      setLoadingState({
+        isLoading: true,
+        message: "Cargando configuración del mapa...",
+      });
+      
+      const { configUrl } = getRuntimeConfig();
+      const response = await fetch(`${configUrl}/baseLayers.json`);
+
+      if (!response.ok) {
+        throw new Error("No se pudo cargar la configuración de capas base");
+      }
+
+      const layers = await response.json();
+      setBaseLayers(layers);
+
+      setLoadingState({ isLoading: false, message: "" });
+    } catch (error) {
+      console.error("Error al cargar capas base:", error);
+      setErrorState("Error al cargar la configuración del mapa");
+      setLoadingState({ isLoading: false, message: "" });
+    }
+  };
+
+  loadBaseLayersConfig();
+}, []);
+```
+
+## 4. Crea el archivo de configuración runtime
+
+Crea `public/runtime-config.js`:
+
+```javascript
+// Configuración runtime - puede ser modificada después del build
+window.__RUNTIME_CONFIG__ = {
+  NEXT_PUBLIC_CONFIG_URL: '/config'
+};
+```
+
+## 5. Modifica tu layout para incluir el script de configuración
+
+Actualiza `src/app/layout.tsx`:
+
+```typescript
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="es" className={`${inter.variable} font-sans`}>
+      <head>
+        {/* Script de configuración runtime - se carga primero */}
+        <script src="/runtime-config.js" />
+      </head>
+      <body>
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+## 6. Actualiza tu Docker Compose
+
+```yaml
+version: '3'
+services:
+  IDE-METEOROLOGIA:
+    container_name: IDE-METEOROLOGIA
+    image: IDE-METEOROLOGIA:latest
+    ports:
+      - 3050:3000
+    volumes:
+      - ./config:/app/public/config
+      - ./runtime-config.js:/app/public/runtime-config.js  # Monta tu configuración personalizada
+    environment:
+      - NEXT_PUBLIC_CONFIG_URL=/config  # Valor por defecto para build
+```
+
+## 7. Crea un script para generar configuraciones
+
+Crea `scripts/generate-config.js`:
+
+```javascript
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+const configUrl = process.argv[2] || '/config';
+
+const configContent = `// Configuración runtime - puede ser modificada después del build
+window.__RUNTIME_CONFIG__ = {
+  NEXT_PUBLIC_CONFIG_URL: '${configUrl}'
+};`;
+
+const outputPath = path.join(process.cwd(), 'public', 'runtime-config.js');
+fs.writeFileSync(outputPath, configContent);
+
+console.log(`✅ Configuración runtime generada: ${configUrl}`);
+```
+
+Hazlo ejecutable y añádelo a package.json:
+
+```json
+{
+  "scripts": {
+    "build": "next build",
+    "generate-config": "node scripts/generate-config.js",
+    "build-with-config": "npm run generate-config -- $CONFIG_URL && npm run build"
+  }
+}
+```
+
+## Uso después del build:
+
+1. **Generar nueva configuración**:
+   ```bash
+   npm run generate-config -- "https://mi-api.com/config"
+   ```
+
+2. **Con Docker**:
+   ```bash
+   # Montar configuración personalizada
+   docker run -v ./mi-config.js:/app/public/runtime-config.js IDE-METEOROLOGIA:latest
+   
+   # O usar variable de entorno para generar configuración
+   docker run -e CONFIG_URL="https://produccion.com/config" IDE-METEOROLOGIA:latest
+   ```
+
+3. **Actualizar en producción**:
+   ```bash
+   # Simplemente reemplaza public/runtime-config.js con tu nueva configuración
+   echo 'window.__RUNTIME_CONFIG__ = { NEXT_PUBLIC_CONFIG_URL: "https://nueva-url.com/config" }' > public/runtime-config.js
+   ```
+
+Esta solución te permite cambiar la URL de configuración dinámicamente después del build, manteniendo la compatibilidad con el desarrollo y producción.

@@ -1,0 +1,7 @@
+Pasos
+1. Crear en 10.11.1.212 en la carpeta srv la carpeta ide-meteorologia
+2. copiar el compactado y descompactarlo
+3. Subir la imagen del docker : docker load -i ide-meteorologia.tar
+4. Publicar el docker : docker-compose up -d 
+
+probar en el navegador : 10.11.1.212:3060

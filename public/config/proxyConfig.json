@@ -1,0 +1,9 @@
+{
+  "proxies": [
+    {
+      "prefix": "/proxy/geocuba/",
+      "target": "https://idevida.geocuba.cu/",
+      "replacePath": true
+    }
+  ]
+}

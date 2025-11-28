@@ -1,0 +1,97 @@
+Para que tu aplicación pueda cargar los archivos de configuración (como `menu.json`) desde una ubicación configurable en Docker y permitir actualizaciones sin necesidad de reconstruir la imagen, puedes seguir estos pasos:
+
+### 1. Estructura de directorios recomendada
+```
+/proyecto
+  /public
+    /config  # Configuración por defecto (opcional, para desarrollo)
+  /src
+  docker-compose.yml
+  Dockerfile
+```
+
+### 2. Modifica tu hook `useMenu`
+Cambia la URL para que tome una variable de entorno:
+
+```typescript
+export default function useMenu() {
+  // ...código anterior...
+
+  useEffect(() => {
+    const fetchMenu = async () => {
+      try {
+        const configUrl = process.env.NEXT_PUBLIC_CONFIG_URL || '/config';
+        const response = await fetch(`${configUrl}/menu.json`);
+        // ...resto del código...
+      }
+    };
+    fetchMenu();
+  }, []);
+  
+  // ...código posterior...
+}
+```
+
+### 3. Dockerfile
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+
+# Configuración por defecto para build-time
+# (Opcional, solo si quieres configs por defecto en la imagen)
+# COPY public/config /app/public/config
+
+RUN npm run build
+
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+### 4. docker-compose.yml
+```yaml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      # Monta un volumen para la configuración
+      - ./config:/app/public/config
+    environment:
+      - NEXT_PUBLIC_CONFIG_URL=/config
+    restart: unless-stopped
+```
+
+### 5. Crear directorio de configuración local
+Crea un directorio `config` en tu proyecto al mismo nivel que `docker-compose.yml`:
+```
+mkdir config
+```
+
+### 6. Ventajas de esta solución:
+1. **Configuración editable**: Los archivos en `./config` se pueden modificar sin reconstruir la imagen
+2. **Persistencia**: Los cambios sobreviven a reinicios del contenedor
+3. **Entorno local**: Durante desarrollo, sigue usando `/public/config`
+4. **Flexibilidad**: Puedes cambiar la ubicación modificando el volumen en docker-compose
+
+### 7. Para actualizar la configuración:
+1. Edita cualquier archivo en `./config` (por ejemplo `menu.json`)
+2. Refresca la página en tu navegador
+3. Los cambios deberían aparecer inmediatamente
+
+### Opción alternativa (para entornos cloud)
+Si usas un cloud provider, puedes:
+1. Almacenar la configuración en S3/Google Storage
+2. Configurar la URL base como variable de entorno:
+```yaml
+environment:
+  - NEXT_PUBLIC_CONFIG_URL=https://my-bucket.s3.amazonaws.com/config
+```
+
+Esto te daría aún más flexibilidad para cambiar la configuración sin tocar los contenedores.

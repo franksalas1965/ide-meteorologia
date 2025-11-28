@@ -1,0 +1,10 @@
+Una vez realizado el npm run build , se genera una carpeta .next y dentro otra : standalone ahi se ponen todos los ficheros necesarios incluida la carpeta node_modules, despues :
+
+1. creamos la imagen docker  parados en dentro de la carpeta carastroweb  
+	docker build -t ide-meteorologia .
+2. creamos la imagen como .tar para subir al servidor de geocuba
+	docker save ide-meteorologia > ide-meteorologia.tar
+3. Copiamos en el servidor 
+4. Subimos la imagen al docker 
+  docker load -i ide-meteorologia.tar
+
