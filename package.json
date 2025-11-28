@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/copy-config.js",
-    "start": "next start",
+    "start": "next start -p 80",
     "lint": "next lint",
     "generate-config": "node scripts/generate-config.js",
     "docker:prepare": "node scripts/prepare-docker.js",
